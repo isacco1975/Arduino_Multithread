@@ -1,0 +1,38 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+TcpSerialDriver
+</name>
+</assembly>
+<members>
+<member name="T:TcpSerialDriver.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:TcpSerialDriver.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:TcpSerialDriver.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:TcpSerialDriver.TCP_SerialDriver.SendData(System.String)">
+ <summary>
+ Sending data incoming via Client to serial port 
+ </summary>
+ <param name="msg"></param>
+ <returns></returns>
+</member>
+<member name="M:TcpSerialDriver.TCP_SerialDriver.Main">
+ <summary>
+ Main Logicv
+ </summary>
+</member>
+</members>
+</doc>
