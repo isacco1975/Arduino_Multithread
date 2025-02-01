@@ -30,3 +30,4 @@ S:\Vbox Share\Software_x_sviluppo_COBOL\Progetti_vari\SmtpSerial\Visual Studio S
 S:\Vbox Share\Software_x_sviluppo_COBOL\Progetti_vari\SmtpSerial\Visual Studio Solution\SmtpSerialDriver\obj\Debug\TcpSerialDriver.exe
 S:\Vbox Share\Software_x_sviluppo_COBOL\Progetti_vari\SmtpSerial\Visual Studio Solution\SmtpSerialDriver\obj\Debug\TcpSerialDriver.xml
 S:\Vbox Share\Software_x_sviluppo_COBOL\Progetti_vari\SmtpSerial\Visual Studio Solution\SmtpSerialDriver\obj\Debug\TcpSerialDriver.pdb
+S:\Vbox Share\Software_x_sviluppo_COBOL\Progetti_vari\SmtpSerial\Visual Studio Solution\SmtpSerialDriver\obj\Debug\SmtpSerialDriver.vbproj.AssemblyReference.cache

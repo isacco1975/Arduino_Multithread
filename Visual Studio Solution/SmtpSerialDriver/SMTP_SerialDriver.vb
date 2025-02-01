@@ -158,14 +158,14 @@ Module TCP_SerialDriver
             Dim e_mail As New MailMessage()
 
             Smtp_Server.UseDefaultCredentials = True
-            Smtp_Server.Credentials = New Net.NetworkCredential("HIDDENgp@gmail.com", "HIDDEN")
+            Smtp_Server.Credentials = New Net.NetworkCredential("HIDDEN@gmail.com", "HIDDEN")
             Smtp_Server.Port = 587
             Smtp_Server.EnableSsl = True
             Smtp_Server.Host = "smtp.gmail.com"
 
             e_mail = New MailMessage()
             e_mail.From = New MailAddress("ArduinoApplication@igp.com")
-            e_mail.To.Add("HIDDENgp@gmail.com")
+            e_mail.To.Add("HIDDEN@gmail.com")
             e_mail.Subject = pStr
             e_mail.IsBodyHtml = True
             e_mail.Body = pStr
