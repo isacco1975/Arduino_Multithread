@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.IO.Ports
 Imports System.Net
+Imports System.Net.Mail
 Imports System.Net.Sockets
 Imports System.Text
 
@@ -19,6 +20,7 @@ Module TCP_SerialDriver
 
 #Region "WORKING-STORAGE"
     Private WithEvents serialPort As SerialPort
+    Private inSerialData As String = String.Empty
     Private comportName As String = String.Empty
     Private comportSpeed As Integer = 9600
     Private comportParity As Parity
@@ -38,16 +40,25 @@ Module TCP_SerialDriver
     End Sub
 
     ''' <summary>
+    ''' Thread Event DataReceived
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub SerialPort_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles serialPort.DataReceived
+        inSerialData = serialPort.ReadExisting()
+        Threading.Thread.Sleep(100)
+        SendEmail(inSerialData)
+    End Sub
+
+    ''' <summary>
     ''' Sending data incoming via Client to serial port 
     ''' </summary>
     ''' <param name="msg"></param>
     ''' <returns></returns>
     Private Function SendData(msg As String) As Boolean
         Try
-            serialPort.Open()
             serialPort.WriteLine(msg)
             Threading.Thread.Sleep(100)
-            serialPort.Close()
             Return True
 
         Catch ex As Exception
@@ -63,6 +74,7 @@ Module TCP_SerialDriver
         ' Reading Serial Port Settings from Configuration, and creates the object
         ReadSettings()
         serialPort = New SerialPort(comportName, comportSpeed, comportParity, comportDataBits, comportStopBits)
+        serialPort.Open()
 
         ' Data buffer for incoming data.
         Dim bytes() As Byte = New [Byte](1024) {}
@@ -138,6 +150,31 @@ Module TCP_SerialDriver
 
         Console.WriteLine(ControlChars.Cr + "Press ENTER to continue...")
         Console.Read()
+    End Sub
+
+    Private Sub SendEmail(pStr As String)
+        Try
+            Dim Smtp_Server As New SmtpClient
+            Dim e_mail As New MailMessage()
+
+            Smtp_Server.UseDefaultCredentials = True
+            Smtp_Server.Credentials = New Net.NetworkCredential("HIDDENgp@gmail.com", "HIDDEN")
+            Smtp_Server.Port = 587
+            Smtp_Server.EnableSsl = True
+            Smtp_Server.Host = "smtp.gmail.com"
+
+            e_mail = New MailMessage()
+            e_mail.From = New MailAddress("ArduinoApplication@igp.com")
+            e_mail.To.Add("HIDDENgp@gmail.com")
+            e_mail.Subject = pStr
+            e_mail.IsBodyHtml = True
+            e_mail.Body = pStr
+
+            Smtp_Server.Send(e_mail)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
 End Module

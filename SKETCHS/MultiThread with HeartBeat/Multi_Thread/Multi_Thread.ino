@@ -17,7 +17,7 @@ void setup() {
    pinMode(4, OUTPUT); //BLUE LED  ID 2
    pinMode(6, OUTPUT); //BUZZER    ID 3
 
-   Serial.begin(9600,SERIAL_8N1); // opens serial port, sets data rate to 9600 bps
+   Serial.begin(115200,SERIAL_8N1); // opens serial port, sets data rate to 9600 bps
 }
 
 void loop() {
@@ -42,9 +42,9 @@ void loop() {
 
          taskNumber1 = taskNumber1 + taskNumber;
 
-         Serial.print("STARTED TASK: ");
+         Serial.print("> TASK: ");
          Serial.print(taskNumber1);
-         Serial.println(" - Device 1 ");
+         Serial.print(" Started - Device 1 ");
       }
 
       if (serialCmd == "2")
@@ -57,9 +57,9 @@ void loop() {
 
          taskNumber2 = taskNumber2 + taskNumber;;
 
-         Serial.print("STARTED TASK: ");
+         Serial.print("> TASK: ");
          Serial.print(taskNumber2);
-         Serial.println(" - Device 2 ");
+         Serial.print(" Started - Device 2 ");
       }
 
       if (serialCmd == "3")
@@ -72,9 +72,9 @@ void loop() {
 
          taskNumber3 = taskNumber3 + taskNumber;;
 
-         Serial.print("STARTED TASK: ");
+         Serial.print("> TASK: ");
          Serial.print(taskNumber3);
-         Serial.println(" - Device 3 ");
+         Serial.print(" Started - Device 3 ");
        }
     }
 
@@ -99,10 +99,11 @@ void thread_GreenLed(int interval)
    if ((elapsedTime > interval) && interval > 0)
    {
       digitalWrite(2, LOW);
-      Serial.print("TASK [");
+      Serial.print("< TASK ");
       Serial.print(taskNumber1);
-      Serial.print("] Finished: Elapsed time: ");
-      Serial.println(elapsedTime -1);
+      Serial.print(" Finished after ");
+      Serial.print(elapsedTime -1);
+      Serial.print(" ms");
       startTime1 = 0;
       interval1 = 0;
       interval = 0;
@@ -121,10 +122,11 @@ void thread_BlueLed(int interval)
    if ((elapsedTime > interval) && interval > 0)
    {
       digitalWrite(4, LOW);
-      Serial.print("TASK [");
+      Serial.print("< TASK ");
       Serial.print(taskNumber2);
-      Serial.print("] Finished: Elapsed time: ");
-      Serial.println(elapsedTime -1);
+      Serial.print(" Finished after ");
+      Serial.print(elapsedTime -1);
+      Serial.print(" ms");
       startTime2 = 0;
       interval2 = 0;
       interval = 0;
@@ -142,14 +144,15 @@ void thread_Buzzer(int interval)
 
    if ((elapsedTime > interval) && interval > 0)
    {
-       noTone(6);
-       Serial.print("TASK [");
-       Serial.print(taskNumber3);
-       Serial.print("] Finished: Elapsed time: ");
-       Serial.println(elapsedTime -1);
-       startTime3 = 0;
-       interval3 = 0;
-       interval = 0;
-       taskNumber3 = 0;
+      noTone(6);
+      Serial.print("< TASK ");
+      Serial.print(taskNumber3);
+      Serial.print(" Finished after ");
+      Serial.print(elapsedTime -1);
+      Serial.print(" ms");
+      startTime3 = 0;
+      interval3 = 0;
+      interval = 0;
+      taskNumber3 = 0;
    }
 }
